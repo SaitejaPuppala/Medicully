@@ -1137,7 +1137,7 @@ app.post('/update_picture',function(req,res){
         }
         else
         {
-          fs.unlink('https://medicully.herokuapp.com'+sess.pic_path, function(error){
+          fs.unlink('../assets'+sess.pic_path, function(error){
           if (error) 
             console.log(error);
           else{
@@ -1182,7 +1182,7 @@ app.post('/update_picture',function(req,res){
         }
         else
         {
-          fs.unlink('https://medicully.herokuapp.com'+sess.pic_path, function(error){
+          fs.unlink('../assets'+sess.pic_path, function(error){
           if (error) 
             console.log(error);
           else
