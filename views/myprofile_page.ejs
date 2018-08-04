@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MEDICULLY</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<style type="text/css">
+		.marg{
+			margin-left: 5px;
+			margin-right: 5px;
+		}
+		.hov:hover{
+			color: white;
+			text-shadow: 0.5px 0.5px 0.5px #000;
+			text-decoration: none;
+		}
+    .hov2:hover{
+      color: green;
+      text-decoration: none;
+    }
+		body{
+			font-family: lato !important;
+		}
+		.modal {
+		  overflow-y: auto;
+		}
+    .fontinc{
+      font-size: 19px;
+    }
+    .verticalLine {
+      border-right: 1px solid hsl(0, 0%, 78%);
+    }
+    .verticalLine2 {
+      border-left: 1px solid hsl(0, 0%, 78%);
+    }
+	</style>
+</head>
+<body>
+  <div id="menu" >
+  	<nav class="navbar navbar-expand-md" style="background: hsl(0, 0%, 78%);width: 100%">
+  	  <div class="container-fluid">
+  	    <div class="navbar-header">
+  	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+  	        <span class="navbar-toggler-icon"></span>
+  	      </button>
+  	    </div>
+  	    <div class="collapse navbar-collapse" id="myNavbarleft">
+  	      <a href="/home"><img class="navbar-brand" src="/public/logo.PNG" alt="logo"></a>
+  	      <ul class="navbar-nav mr-auto text-center">
+  	        <li class="nav-item marg"><a class="nav-link hov" href="/blood_donors">BLOOD DONORS</a></li>
+  	        <li class="w3-dropdown-hover nav-item marg">
+  	        	<a class="nav-link hov" href="/about">ABOUT</a>
+  	        	<ul id="Demo" class="w3-dropdown-content w3-bar-block w3-card-4 w3-animate-zoom dropdown-menu">
+  	              <li><a class="dropdown-item w3-button" href="#">About Us</a></li>
+  	              <li><a class="dropdown-item w3-button" href="#">Contact Us</a></li>
+  	            </ul>
+  	        </li>
+  	      </ul>
+  	    </div>
+  	  <div class="collapse navbar-collapse" id="myNavbarright">
+  	      <ul class="navbar-nav ml-auto text-center">
+            <li class="nav-item marg nav-link" style="color:green;font-size:16px;">
+              Hello&nbsp;&nbsp;<% if(role == 'doctor'){ %><i>DR.<%= name.toUpperCase() %></i>
+                    <% }else {%><i><%= name.toUpperCase() %></i></li>
+                    <% } %>
+  	        <li class="nav-item marg"><a class="nav-link hov" href="/my_profile" style="color: white;text-shadow: 0.5px 0.5px 0.5px #000;text-decoration: none;">PROFILE</a></li>
+            <li class="nav-item marg"><a class="nav-link hov" href="/my_request">REQUESTS</a></li>
+  	        <li class="nav-item marg"><a class="nav-link hov" href="/logout">LOGOUT</a></li>
+  	      </ul>
+  	    </div>
+  			</div>
+  	</nav>
+  </div>
+<div class="row" style="margin-top:20px;">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-10 container-fluid" style="height: 100%;">
+   <div class="row">
+		 <div class="col-sm-3 verticalLine text-center" style="padding: 25px;">
+      <h3 style="text-align: center;color: green;" id="name_heading" style="display: none;"><%= name.toUpperCase() %></h3><br/>
+      <img class="mx-auto" src="<%= pic_path %>" alt="<%= name %>" style="width:17vw;height: 17vw;display: block; border-radius: 3px;">
+      <br/>
+      <button type="button" class="btn btn-success btn-block" id="updatepic_button" style="display: block;" onclick="$('#updpicModal').modal('show')">Update Picture</button>
+      <br/><br/>
+      <button type="button" class="btn btn-success btn-block" id="personalinfo_button" onclick="personalinfo()">Personal Info</button>
+      <button type="button" class="btn btn-block" id="qsnsasked_button" onclick="qsnsasked()">Questions Asked</button>
+      <% if(role == 'doctor'){ %>
+      <button type="button" class="btn btn-block" id="qsnsanswered_button" onclick="qsnsanswered()">Questions Answered</button>
+      <% } %>
+      <button type="button" class="btn btn-block" id="requestsinfo_button" onclick="requestsinfo()">Requests Info</button>
+     </div>
+		 <div class="col-sm-9" id="profile_body">
+      
+		 </div>
+	 </div>
+  </div>
+  <div class="col-sm-1"></div>
+</div>
+<div class="modal fade" id="updpassModal">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-body">
+       <div class="modal-header">
+          <h4 class="modal-title mx-auto">UPDATE PASSWORD</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+              <input type="password" class="form-control" id="passold" onfocus="document.getElementById('passerr').style.display = 'none';" placeholder="Enter your Old Password" required="true">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="passnew" onfocus="document.getElementById('passerr').style.display = 'none';" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="It should contain atleast one capital alphabet,one small alphabet,one number and minimum length is 8" placeholder="Enter your New Password" required="true">
+            </div>
+            <p style="color: red;display: none;" id='passerr'></p>
+            <button type="submit" class="btn btn-success btn-block" onclick="passcheck()">UPDATE</button>
+        </div>
+       </div>
+     </div>
+   </div>
+</div> 
+<div class="modal fade" id="upddetModal">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title mx-auto">UPDATE DETAILS</h4>
+      </div>
+       <div class="modal-body" style="text-align: center;">
+          <div class="form-group">
+              <input type="text" id="name" class="form-control" name="name" placeholder="Enter your Name" required="true">
+            </div>
+            <div class="form-group">
+              <input type="tel" pattern="[0-9]{10}" id="mobile" onfocus="setCustomValidity('')" oninvalid="setCustomValidity('Please enter a valid mobile number')" class="form-control" name="mobile" placeholder="Enter Mobile Number" required="true">
+            </div>
+            <div class="form-group form-check">
+            <label class="form-check-label">
+            <input class="form-check-input" id="checkbox" type="checkbox" name="donor" onclick="
+            if(this.checked == true)
+            { document.getElementById('bg1').style.display = 'block';
+              document.getElementById('bg_inp1').setAttribute('required','true');}
+              else
+              {document.getElementById('bg1').style.display = 'none';
+                document.getElementById('bg_inp1').setAttribute('required','false');}"> Blood Donor
+            </label>
+            </div>
+            <div id="bg1" class="form-group" style="display:none;">
+             <input id="bg_inp1" type="text" class="form-control" name="bloodgrp" maxlength="3" pattern="[A|B|AB|O][+|-]" title="It should contain only blood group and rh factor(+/-)" placeholder="Enter Bloodgroup">
+           </div>
+              <button type="submit" class="btn btn-success btn-block" onclick="detupdate()">UPDATE</button>
+       </div>
+     </div>
+   </div>
+</div> 
+<div class="modal fade" id="updpicModal">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+      <div class="modal-header">
+          <h4 class="modal-title mx-auto">UPDATE PICTURE</h4>
+      </div>
+     <div class="modal-body">
+     <form name="updpicform" id="updpic" action="/update_picture" enctype="multipart/form-data" method="post">
+     <div class="form-group" id="speci">
+       <label for="file">Upload New Image</label>
+       <input id="upd_pic" type="file" class="form-control" name="file" accept="image/*" required="true">
+     </div>
+     <button type="submit" class="btn btn-success btn-block">UPDATE</button>
+     </form>
+     </div>
+     </div>
+   </div>
+</div> 
+<div class="modal fade" id="passsuccModal">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-body">
+       <p style="text-align:center;color:green;">PASSWORD UPDATED SUCCESSFULLY</p>
+       </div>
+     </div>
+   </div>
+</div>
+<div class="modal fade" id="updreqsuccModal">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-body">
+       <p style="text-align:center;color:green;">DETAILS UPDATED SUCCESSFULLY</p>
+       </div>
+     </div>
+   </div>
+</div>
+<div class="modal fade" id="updreqfailModal">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-body">
+       <p style="text-align:center;color:red;">DETAILS ARE NOT UPDATED UNFORTUNATELY</p>
+       </div>
+     </div>
+   </div>
+</div>
+<div class="row container-fluid" style="padding: 10px;background: hsl(0, 0%, 78%);margin-top: 20px;">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div class="row container-fluid" style="text-align: center;">
+      <div class="col-sm-4">
+        <h4 style="color: green;">MEDICULLY</h4><br/>
+        <p><a href="/home" class="hov">Home</a></p>
+        <p><a href="/my_profile" class="hov">Profile</a></p>
+        <p><a href="/my_request" class="hov">Requests</a></p>
+        <p><a href="/blood_donors" class="hov">Blood Donors</a></p>
+      </div>
+      <div class="col-sm-4">
+        <h4 style="color: green;">ABOUT</h4><br/>
+        <p><a href="/about" class="hov">About Us</a></p>
+        <p><a href="#" class="hov">Privacy Policy</a></p>
+        <p><a href="#" class="hov">Terms Of Service</a></p>
+        <p><a href="/about" class="hov">Contact Us</a></p>
+      </div>
+      <div class="col-sm-4">
+         <h4 style="color: green;">CONNECT</h4><br/>
+        <p><a href="#" class="hov"><i class="fa fa-facebook-official" style="font-size:25px;cursor:pointer" title="Facebook"></i>&nbsp;&nbsp;Facebook</a></p>
+        <p><a href="#" class="hov"><i class="fa fa-instagram" style="font-size:25px;cursor:pointer" title="Instagram"></i>&nbsp;&nbsp;Instagram</a></p>
+        <p><a href="#" class="hov"><i class="fa fa-twitter-square" style="font-size:25px;cursor:pointer" title="Twitter"></i>&nbsp;&nbsp;Twitter</a></p>
+        <p><a href="#" class="hov"><i class="fa fa-youtube" style="font-size:25px;cursor:pointer;" title="Youtube"></i>&nbsp;&nbsp;Youtube</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2"></div>
+  <div class="container-fluid">
+    <p style="text-align: center;font-size: 17px;"><em>All CopyRights Reserved.<b> Medicully ©2018</b></em></p>
+  </div>
+</div>
+<script type="text/javascript">
+  var role = '',dt = '';
+  $(document).ready(function(){
+    personalinfo();
+    $("#updreqsuccModal").on("hidden.bs.modal", function () {
+    location.reload();
+});
+  });
+function passcheck()
+{
+  var x = document.getElementById('passold').value;
+  var y = document.getElementById('passnew').value;
+  var pattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+  if(!pattern.test(y))
+  {
+    document.getElementById('passerr').style.display = 'block';
+    document.getElementById('passerr').innerHTML = '* Your New Password should contain atleast one capital alphabet,one small alphabet,one number and minimum length is 8';
+  }
+  else
+  {
+  var xhttp= new XMLHttpRequest();
+    xhttp.open('POST', '/update_password', true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("passold="+x+"&passnew="+y);
+    xhttp.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200) {
+        if(this.responseText == '1')
+        {
+          document.getElementById('passold').value = '';
+          document.getElementById('passnew').value = '';
+          $('#updpassModal').modal('hide');
+          $('#passsuccModal').modal('show');
+        }
+        else{
+          document.getElementById('passerr').style.display = 'block';
+          document.getElementById('passerr').innerHTML = '* Entered Old Password is Incorrect';
+        }
+      }
+   }
+ }
+}
+function personalinfo()
+{
+  var data = '';
+  //console.log('inside');
+  document.getElementById('profile_body').innerHTML = '<p style="text-align: center;">\
+        <img src="/public/loader.gif" alt="loading" class="mx-auto" style="width:55px;margin-top: 200px;margin-bottom: 200px;">\
+      </p>';
+   document.getElementById('personalinfo_button').setAttribute('class','btn btn-success btn-block');
+   document.getElementById('qsnsasked_button').setAttribute('class','btn btn-block');
+   document.getElementById('requestsinfo_button').setAttribute('class','btn btn-block');
+   document.getElementById('name_heading').style.display = 'none';
+   document.getElementById('updatepic_button').style.display = 'block';
+    var xhttp= new XMLHttpRequest();
+    xhttp.open('GET', '/my_profile/info', true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send();
+    xhttp.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200) {
+        data =JSON.parse(this.responseText);
+        dt = data;
+        var x = '<h3 style="text-align: center;color: green;">PERSONAL INFO</h3></br>\
+                 <div class="row">\
+                  <div class="col-sm-5" style="text-align: right;">\
+                    <p class="fontinc"><strong>Name</strong></p>\
+                    <p class="fontinc"><strong>Username</strong></p>\
+                    <p class="fontinc"><strong>Email</strong></p>\
+                    <p class="fontinc"><strong>Mobile Number</strong></p>\
+                    <p class="fontinc"><strong>Role</strong></p>\
+                    <p class="fontinc"><strong>Donor</strong></p>';
+        if(data.donor == 'on')
+        {
+          x += '<p class="fontinc"><strong>Blood Group</strong></p>';
+        }
+        x += '</div>\
+              <div class="col-sm-1" style="text-align: center;">\
+                <p class="fontinc"><strong>:</strong></p>\
+                <p class="fontinc"><strong>:</strong></p>\
+                <p class="fontinc"><strong>:</strong></p>\
+                <p class="fontinc"><strong>:</strong></p>\
+                <p class="fontinc"><strong>:</strong></p>\
+                <p class="fontinc"><strong>:</strong></p>';
+        if(data.donor == 'on')
+        {
+          x += '<p class="fontinc"><strong>:</strong></p>';
+        }       
+        x += '</div>\
+              <div class="col-sm-6">\
+                <p class="fontinc"><i>'+ data.name.toUpperCase() +'</i></p>\
+                <p class="fontinc"><i>'+ data.username +'</i></p>\
+                <p class="fontinc"><i>'+ data.email +'</i></p>\
+                <p class="fontinc"><i>'+ data.mobile +'</i></p>';
+        if(data.role == 'doctor')
+        {
+          x += '<p class="fontinc"><i>Doctor</i></p>';
+        }
+        else
+        {
+          x += '<p class="fontinc"><i>General User</i></p>';
+        }
+        if(data.donor == 'on')
+        {
+          x += '<p class="fontinc"><i>Yes</i></p>\
+                <p class="fontinc"><i>'+ data.bloodgrp +'</i></p>';
+        }
+        else
+        {
+          x += '<p class="fontinc"><i>No</i></p>';
+        }
+        
+        x += '</div>\
+              </div>\
+              </br></br>\
+              <p style="text-align: center;">\
+              <button type="button" class="btn btn-success mr-4" onclick="$(\'#upddetModal\').modal(\'show\');detupd()">Update Details</button>\
+              <button class="btn btn-success" type="button" onclick="$(\'#updpassModal\').modal(\'show\');">Update Password</button>\
+              </p>';
+        document.getElementById('profile_body').innerHTML = x;
+        if(data.role == 'doctor')
+        {
+          document.getElementById('qsnsanswered_button').setAttribute('class','btn btn-block');
+        }
+          role = data.role;       
+      }
+   } 
+}
+function qsnsasked()
+{
+   var data = '',x='';
+   document.getElementById('profile_body').innerHTML = '<p style="text-align: center;">\
+        <img src="/public/loader.gif" alt="loading" class="mx-auto" style="width:55px;margin-top: 200px;margin-bottom: 200px;">\
+      </p>';
+   document.getElementById('personalinfo_button').setAttribute('class','btn btn-block');
+   document.getElementById('qsnsasked_button').setAttribute('class','btn btn-success btn-block');
+   document.getElementById('requestsinfo_button').setAttribute('class','btn btn-block');
+   document.getElementById('name_heading').style.display = 'block';
+   document.getElementById('updatepic_button').style.display = 'none';
+    var xhttp= new XMLHttpRequest();
+    xhttp.open('GET', '/my_profile/qsns_asked', true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send();
+    xhttp.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200) {
+        data =JSON.parse(this.responseText);
+        x += '<h3 style="text-align: center;color: green;">QUESTIONS ASKED</h3></br>';
+        if(data.length == 0)
+        {
+          x += '<p style="color:red;text-align:center;font-size:18px;">-- No Questions Asked Yet --</p>';
+        }
+        else
+        {
+          for(var i=0;i<data.length;i++)
+          {
+            x += '<p style="font-size:18px;margin-left:10px;">Q'+ (i+1) +'. '+ data[i].qsn+'</p>\
+                  <p style="text-align:right;"><a class="btn btn-success" href="/qsn_answrs/'+data[i]._id+'">VIEW ANSWERS</a></p>';
+            if(i<data.length-1)
+              x += '<hr>';
+          }
+        }
+        document.getElementById('profile_body').innerHTML = x;
+        if(role == 'doctor')
+        {
+          document.getElementById('qsnsanswered_button').setAttribute('class','btn btn-block');
+        }
+                  
+      }
+   } 
+}
+function qsnsanswered()
+{
+   var data = '',x='';
+   document.getElementById('profile_body').innerHTML = '<p style="text-align: center;">\
+        <img src="/public/loader.gif" alt="loading" class="mx-auto" style="width:55px;margin-top: 200px;margin-bottom: 200px;">\
+      </p>';
+   document.getElementById('personalinfo_button').setAttribute('class','btn btn-block');
+   document.getElementById('qsnsasked_button').setAttribute('class','btn btn-block');
+   document.getElementById('requestsinfo_button').setAttribute('class','btn btn-block');
+   document.getElementById('name_heading').style.display = 'block';
+   document.getElementById('updatepic_button').style.display = 'none';
+    var xhttp= new XMLHttpRequest();
+    xhttp.open('GET', '/my_profile/qsns_answered', true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send();
+    xhttp.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200) {
+        data =JSON.parse(this.responseText);
+        x += '<h3 style="text-align: center;color: green;">QUESTIONS ANSWERED</h3></br>';
+        if(data.length == 0)
+        {
+          x += '<p style="color:red;text-align:center;font-size:18px;">-- No Questions Answered Yet --</p>';
+        }
+        else
+        {
+          for(var i=0;i<data.length;i++)
+          {
+            x += '<p style="font-size:18px;margin-left:10px;">Q'+ (i+1) +'. '+ data[i].qsn+'</p>\
+                  <p style="text-align:right;"><a class="btn btn-success" href="/qsn_answrs/'+data[i]._id+'">VIEW ANSWERS</a></p>';
+            if(i<data.length-1)
+              x += '<hr>';
+          }
+        }
+        document.getElementById('profile_body').innerHTML = x;
+        if(role == 'doctor')
+        {
+          document.getElementById('qsnsanswered_button').setAttribute('class','btn btn-success btn-block');
+        }
+                  
+      }
+   } 
+}
+function requestsinfo()
+{
+   var data = '',x='';
+   document.getElementById('profile_body').innerHTML = '<p style="text-align: center;">\
+        <img src="/public/loader.gif" alt="loading" class="mx-auto" style="width:55px;margin-top: 200px;margin-bottom: 200px;">\
+      </p>';
+   document.getElementById('personalinfo_button').setAttribute('class','btn btn-block');
+   document.getElementById('qsnsasked_button').setAttribute('class','btn btn-block');
+   document.getElementById('requestsinfo_button').setAttribute('class','btn btn-success btn-block');
+   document.getElementById('name_heading').style.display = 'block';
+   document.getElementById('updatepic_button').style.display = 'none';
+    var xhttp= new XMLHttpRequest();
+    xhttp.open('GET', '/my_profile/request_info', true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send();
+    xhttp.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200) {
+        data =JSON.parse(this.responseText);
+        x += '<h3 style="text-align: center;color: green;">REQUESTS INFO</h3></br>\
+               <div class="row">\
+                <div class="col-sm-6 verticalLine">\
+                  <h4 style="text-align: center;color: green;">DETAILS SHARED TO</h4></br>';
+        if(data[0].length == 0)
+        {
+          x += '<p style="color:red;text-align:center;font-size:16px;">-- No One --</p>'; 
+        }
+        else
+        {
+          for(var i=0;i<data[0].length;i++)
+          {
+            x += '<p style="font-size:16px;margin-left:10px;">'+ (i+1) +'. '+ data[0][i].req_from_name+'</p>\
+                  <p style="text-align:right;"><a class="btn btn-success" href="/prof_page/'+data[0][i].req_from+'">VIEW PROFILE</a></p>';
+            if(i<data[0].length-1)
+              x += '<hr>';
+          }
+        }
+        x += '</div>\
+                <div class="col-sm-6 verticalLine2">\
+                  <h4 style="text-align: center;color: green;">DETAILS SHARED BY</h4></br>';
+        if(data[1].length == 0)
+        {
+          x += '<p style="color:red;text-align:center;font-size:16px;">-- No One --</p>'; 
+        }
+        else
+        {
+          for(var i=0;i<data[1].length;i++)
+          {
+            x += '<p style="font-size:16px;margin-left:10px;">'+ (i+1) +'. '+ data[1][i].req_to_name+'</p>\
+                  <p style="text-align:right;"><a class="btn btn-success" href="/prof_page/'+data[1][i].req_to+'">VIEW PROFILE</a></p>';
+            if(i<data[1].length-1)
+              x += '<hr>';
+          }
+        }
+        x += '</div>\
+              </div>';
+        document.getElementById('profile_body').innerHTML = x;
+        if(role == 'doctor')
+        {
+          document.getElementById('qsnsanswered_button').setAttribute('class','btn btn-block');
+        }
+                  
+      }
+   } 
+}
+function detupd()
+{
+  document.getElementById('name').value = dt.name;
+  document.getElementById('mobile').value = dt.mobile;
+  if(dt.donor == 'on')
+  {
+    document.getElementById('checkbox').click();
+    document.getElementById('bg_inp1').value = dt.bloodgrp;
+  }
+}
+
+function detupdate()
+{
+  var val = true;
+  var blg = /^[A|B|O|AB]{1,2}[+-]{1}$/;
+  var mob = /^(\+\d{1,2}[- ]?)?\d{10}$/;
+  var nm = document.getElementById('name').value ;
+  var mb = document.getElementById('mobile').value;
+  if(document.getElementById('checkbox').checked==true)
+  {
+    var dn = 'on';
+    var bgp = document.getElementById('bg_inp1').value;
+  }
+  else
+  {
+    var dn = 'off';
+    var bgp = 'NA';
+  }
+  if(dn == 'on')
+  {
+    val = blg.test(bgp);
+  }
+  console.log(val);
+  console.log(mob.test(mb));
+  if(mob.test(mb)&&val)
+  {
+  var xhttp= new XMLHttpRequest();
+  xhttp.open('GET', '/detupd/'+nm+'/'+mb+'/'+dn+'/'+bgp, true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send();
+  xhttp.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+      if(this.responseText == '0'){
+        $('#upddetModal').modal('hide');
+        $('#updreqfailModal').modal('show');
+      }
+      else if(this.responseText == '1'){
+        $('#upddetModal').modal('hide');
+        $('#updreqsuccModal').modal('show');
+      }
+    }
+}
+}
+else
+{
+  if(!mob.test(mb))
+  {
+    document.getElementById('mobile').setCustomValidity("Please enter a valid mobile number");
+  }
+  if(!val)
+  {
+    document.getElementById('bg_inp1').setCustomValidity("Please enter a valid blood group along with rh factor(+/-)");
+  }
+}
+}
+</script>
+</body>
+</html>

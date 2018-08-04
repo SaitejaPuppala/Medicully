@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Password Updation</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+  <p style="text-align:center;"><img style="width: 250px" src="/public/logo_light.PNG" alt="logo"></p><br/>
+  <div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4" style="text-align: center;">
+      <p style="font-size: 18px;">Hello <b><%= data.name.toUpperCase()%></b></p>
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">PASSWORD RECOVERY</h4><br/>
+            <div class="form-group">
+              <input type="password" class="form-control" id="passnew" onfocus="document.getElementById('passerr').style.display = 'none';" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="It should contain atleast one capital alphabet,one small alphabet,one number and minimum length is 8" placeholder="Enter your New Password" required="true">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="passnew_conf" onfocus="document.getElementById('passerr').style.display = 'none';" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="It should contain atleast one capital alphabet,one small alphabet,one number and minimum length is 8" placeholder="Confirm your New Password" required="true">
+            </div>
+            <p style="color: red;display: none;" id='passerr'></p>
+            <button type="submit" class="btn btn-success btn-block" onclick="passcheck2()">UPDATE</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4"></div>
+  </div>
+  <script type="text/javascript">
+    function passcheck2()
+    {
+      var p = document.getElementById('passnew').value;
+      var q = document.getElementById('passnew_conf').value;
+      if(p == q)
+      {
+        var xhttp= new XMLHttpRequest();
+        xhttp.open('POST', '/forgpass_upd', true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("username=<%=data.username%>&role=<%=data.role%>&passnew="+p);
+        xhttp.onreadystatechange = function(){
+          if (this.readyState == 4 && this.status == 200) {
+            if(this.responseText == '0')
+            {
+              document.getElementById('passerr').innerHTML = '* Updation failed..Please Try Again';
+              document.getElementById('passerr').style.display = 'block';
+            }
+            else if(this.responseText == '1')
+            {
+              window.location.href = '/pass_upd_succ';
+            }
+          }
+       }
+      }
+      else
+      {
+        document.getElementById('passerr').innerHTML = '* Passwords mismatch';
+        document.getElementById('passerr').style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>

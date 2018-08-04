@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MEDICULLY</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<style type="text/css">
+		.marg{
+			margin-left: 5px;
+			margin-right: 5px;
+		}
+		.hov:hover{
+			color: white;
+			text-shadow: 0.5px 0.5px 0.5px #000;
+			text-decoration: none;
+		}
+		.hov2:hover{
+			color: green;
+			text-decoration: none;
+		}
+		body{
+			font-family: lato !important;
+		}
+		.modal {
+		    overflow-y: auto;
+		}
+    .blk{
+      display: :block;
+    }
+	</style>
+</head>
+<body>
+<!-- <div id="header">
+	<h2 style="text-align: center;font-family: lato;text-shadow: 0.25px 0.25px 0.25px #000;">MEDICULLY</h2>
+</div> -->
+
+<div id="menu" >
+	<nav class="navbar navbar-expand-md" style="background: hsl(0, 0%, 78%);width: 100%">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="navbar-toggler-icon"></span>
+	      </button>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbarleft">
+	      <a href="/home"><img class="navbar-brand" src="/public/logo.PNG" alt="logo"></a>
+	      <ul class="navbar-nav mr-auto text-center">
+	        <li class="nav-item marg"><a class="nav-link hov" href="/blood_donors">BLOOD DONORS</a></li>
+	        <li class="w3-dropdown-hover nav-item marg">
+	        	<a class="nav-link hov" href="/about">ABOUT</a>
+	        	<ul id="Demo" class="w3-dropdown-content w3-bar-block w3-card-4 w3-animate-zoom dropdown-menu">
+	              <li><a class="dropdown-item w3-button" href="#">About Us</a></li>
+	              <li><a class="dropdown-item w3-button" href="#">Contact Us</a></li>
+	            </ul>
+	        </li>
+	      </ul>
+	    </div>
+	  <div class="collapse navbar-collapse" id="myNavbarright">
+	      <ul class="navbar-nav ml-auto text-center">
+	        <li class="nav-item marg"><a class="nav-link hov"  data-toggle="modal" data-target="#loginModal" data-keyboard="true"  href="#">LOGIN</a></li>
+	        <li class="nav-item marg"><a class="nav-link hov" data-toggle="modal" data-target="#signupModal" data-keyboard="true" href="#">SIGNUP</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+</div>
+
+<!--MODALS-->
+
+<div class="modal fade" id="loginModal">
+ <div class="modal-dialog modal-dialog-centered" >
+      <div class="modal-content">
+      	<div class="modal-header">
+          <h4 class="modal-title mx-auto">LOGIN</h4>
+        </div>
+        <div class="modal-body">
+					<form name="loginform" id="login" onsubmit="return login_check();" enctype="application/x-www-form-urlencoded" action="/login" method="post">
+		          <div class="form-group">
+		            <input type="text" id="lg_un" onfocus="document.getElementById('logn_check').innerHTML='';" class="form-control" name="username" placeholder="Enter Username" required="true">
+		          </div>
+		          <div class="form-group">
+		            <input type="password" id="lg_pwd" onfocus="document.getElementById('logn_check').innerHTML='';" class="form-control" name="password" placeholder="Enter Password" required="true">
+		          </div>
+							<p id="logn_check" style="color:red;"></p>
+		          <div class="form-group form-check" style="float: left;">
+		        <label class="form-check-label">
+		          <input class="form-check-input" onclick="chekbox()" id="chkbox" type="checkbox" name="remember"> Remember me
+		        </label>
+		      </div>
+		          <button type="submit" class="btn btn-success btn-block">LOGIN</button>
+		       </form>
+        </div>
+        <div class="modal-footer">
+         <span><a href="#" onclick="event.preventDefault();$('#loginModal').modal('hide');$('#forgpassModal').modal('show');" style="color: green;float: right;"><em>Forgot Password?</em></a><br/>
+         <em>Not a member, Register from <a style="color: green;" onclick="event.preventDefault();$('#loginModal').modal('hide');$('#signupModal').modal('show');" href="#">HERE</a></em></span>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade" id="signupModal">
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+  	<div class="modal-header">
+      <h4 class="modal-title mx-auto">SIGNUP AS</h4>
+    </div>
+    <div class="modal-body">
+    <div class="row">
+    <div class="col-sm-6">
+    <a href="#" onclick="event.preventDefault();$('#signupModal').modal('hide');$('#docModal').modal('show');">
+    <img src="/public/doctor.PNG" class="img-thumbnail">
+    </a>
+    <p style="text-align: center;">DOCTOR</p>
+    </div>
+    <div class="col-sm-6">
+    <a href="#" onclick="event.preventDefault();$('#signupModal').modal('hide');$('#patModal').modal('show');">
+    <img src="/public/patient.png" class="img-thumbnail">
+    </a>
+    <p style="text-align: center;">PATIENT</p>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="modal fade text-center" id="docModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      	<div class="modal-header">
+          <h4 class="modal-title mx-auto">DOCTOR REGISTERATION</h4>
+        </div>
+        <div class="modal-body">
+        <form name="docregform" id="docreg" action="/docreg" enctype="multipart/form-data" onsubmit="return (email_check(1)+uname_check(1) == 0);" method="post">
+        	<div class="form-group">
+              <input type="text" class="form-control" name="name" placeholder="Enter your Name" required="true">
+            </div>
+            <div class="form-group">
+              <input type="tel" pattern="[0-9]{10}" onfocus="setCustomValidity('')" oninvalid="setCustomValidity('Please enter a valid mobile number')" class="form-control" name="mobile" placeholder="Enter Mobile Number" required="true">
+            </div>
+					<p id="email_err1" style="color:red;"></p>
+            <div class="form-group">
+              <input id="email1" type="email" class="form-control" name="email" placeholder="Enter Email" onblur="email_check(1)" onfocus="document.getElementById('email_err1').innerHTML='';" required="true">
+            </div>
+						<div class="form-group">
+							<label for="file">Upload image of MBBS Certificate</label>
+							<input type="file" class="form-control" name="file1" accept="image/*" required="true">
+						</div>
+            <div class="form-group">
+              <label for="file">Choose Speciality(if any)</label>
+              <select name="specialities" id="spec" onmousedown="this.size=5;" onchange='this.size=0;
+              if(this.value!="none")
+              	{document.getElementById("speci").style.display="block";
+                 document.getElementById("speci_inp").setAttribute("required","true");}
+              else
+              	{document.getElementById("speci").style.display="none";
+                 document.getElementById("speci_inp").setAttribute("required","false");}'
+              onblur="this.size=0;" style="width: 100%;">
+                  <option value="none" selected>Select if any</option>
+                  <option value="Anesthesiology">Anesthesiology</option>
+                  <option value="Cardiothoracic Radiology">Cardiothoracic Radiology</option>
+                  <option value="Dermatology">Dermatology</option>
+                  <option value="Gynecology">Gynecology</option>
+                  <option value="Neurology">Neurology</option>
+                  <option value="Nephrology">Nephrology</option>
+                  <option value="Orthopaedic Surgery">Orthopaedic Surgery</option>
+                  <option value="Pediatrics">Pediatrics</option>
+                  <option value="Radiology-Diagnostic">Radiology-Diagnostic</option>
+                  <option value="Surgery-General">Surgery-General</option>
+                  <option value="Thoracic Surgery">Thoracic Surgery</option>
+                  <option value="Urology">Urology</option>
+                  <option value="Vascular Surgery">Vascular Surgery</option>
+              </select>
+            </div>
+						<div class="form-group" id="speci" style="display: none;">
+						 <label for="file">Upload image of Certificate for above chosen Speciality</label>
+						 <input id="speci_inp" type="file" class="form-control" name="file2" accept="image/*">
+					 </div>
+				 <p id="uname_err1" style="color:red;"></p>
+             <div class="form-group">
+              <input id="uname1" type="text" class="form-control" name="username" minlength="5" onfocus="document.getElementById('uname_err1').innerHTML='';" onblur="uname_check(1)" pattern="[A-Za-z][A-Za-z0-9]*" title="It should start with an alphabet and contain only alphabets(capital or small) or numbers and minimum length is 5" placeholder="Enter Username" required="true">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" name="password" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="It should contain atleast one capital alphabet,one small alphabet,one number and minimum length is 8" placeholder="Enter Password" required="true">
+            </div>
+            <div class="form-group form-check">
+		        <label class="form-check-label">
+		        <input class="form-check-input" type="checkbox" name="Donor" onchange="
+						if(this.checked == true)
+						{ document.getElementById('bg1').style.display = 'block';
+							document.getElementById('bg_inp1').setAttribute('required','true');}
+							else
+							{document.getElementById('bg1').style.display = 'none';
+								document.getElementById('bg_inp1').setAttribute('required','false');}"> Want to donate blood
+		        </label>
+		        </div>
+						<div id="bg1" class="form-group" style="display:none;">
+						 <input id="bg_inp1" type="text" class="form-control" name="bloodgrp" maxlength="3" pattern="[A|B|O|AB]{1,2}[+-]{1}" title="It should contain only blood group and rh factor(+/-)" placeholder="Enter Bloodgroup">
+					 </div>
+              <button type="submit" class="btn btn-success btn-block">SIGNUP</button>
+         </form>
+        </div>
+        <div class="modal-footer">
+         <em class="mr-auto">Your personal details are not visible to others unless you share with them</em>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade text-center" id="patModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      	<div class="modal-header">
+          <h4 class="modal-title mx-auto">PATIENT REGISTERATION</h4>
+        </div>
+        <div class="modal-body">
+        <form name="patregform" id="patreg" action="/patreg" enctype="application/x-www-form-urlencoded" method="post" onsubmit="return (email_check(2)+uname_check(2) == 0);">
+        	<div class="form-group">
+              <input type="text" class="form-control" name="name" placeholder="Enter your Name" required="true">
+            </div>
+            <div class="form-group">
+              <input type="text" pattern="[0-9]{10}" onfocus="setCustomValidity('')" oninvalid="setCustomValidity('Please enter a valid mobile number')" class="form-control" name="mobile" placeholder="Enter Mobile Number" required="true">
+            </div>
+					<p id="email_err2" style="color:red;"></p>
+            <div class="form-group">
+              <input id="email2" type="email" class="form-control" name="email" placeholder="Enter Email" onfocus="document.getElementById('email_err2').innerHTML='';" onblur="email_check(2)" required="true">
+            </div>
+					<p id="uname_err2" style="color:red;"></p>
+            <div class="form-group">
+              <input id="uname2" type="text" class="form-control" name="username" minlength="5" pattern="[A-Za-z][A-Za-z0-9]*" onfocus="document.getElementById('uname_err2').innerHTML='';" onblur="uname_check()" title="It should start with an alphabet and contain only alphabets(capital or small) or numbers and minimum length is 5" placeholder="Enter Username" required="true">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" name="password" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="It should contain atleast one capital alphabet,one small alphabet,one number and minimum length is 8" placeholder="Enter Password" required="true">
+            </div>
+						<div class="form-group form-check">
+		        <label class="form-check-label">
+		        <input class="form-check-input" type="checkbox" name="Donor" value="on" onchange="
+						if(this.checked == true)
+						{ document.getElementById('bg2').style.display = 'block';
+							document.getElementById('bg_inp2').setAttribute('required','true');}
+							else
+							{document.getElementById('bg2').style.display = 'none';
+								document.getElementById('bg_inp2').setAttribute('required','false');}"> Want to donate blood
+		        </label>
+		        </div>
+						<div id="bg2" class="form-group" style="display:none;">
+						 <input id="bg_inp2" type="text" class="form-control" name="bloodgrp" maxlength="3" pattern="[A|B|O|AB]{1,2}[+-]{1}" title="It should contain only blood group and rh factor(+/-)" placeholder="Enter Bloodgroup">
+					 </div>
+            <button type="submit" class="btn btn-success btn-block">SIGNUP</button>
+         </form>
+        </div>
+        <div class="modal-footer">
+         <em class="mr-auto">Your personal details are not visible to others unless you share with them</em>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade" id="reqfailModal">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-body">
+       <p style="text-align:center;">PLEASE LOGIN TO VIEW ANSWERS</p>
+       </div>
+     </div>
+   </div>
+</div>
+<div class="modal fade" id="forgpassModal">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-body">
+       <div class="modal-header">
+          <h4 class="modal-title mx-auto">FORGOT PASSWORD</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+              <input type="email" class="form-control" id="forgemail" onfocus="document.getElementById('emailerr').style.display = 'none';" placeholder="Enter your registered email" required="true">
+            </div>
+            <p style="color: red;display: none;" id='emailerr'></p>
+            <button type="submit" class="btn btn-success btn-block" onclick="forgpass()">CONTINUE</button>
+        </div>
+       </div>
+     </div>
+   </div>
+</div>
+<div class="modal fade" id="profailModal">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-body">
+       <p style="text-align:center;">PLEASE LOGIN TO VIEW PROFILES</p>
+       </div>
+     </div>
+   </div>
+</div>
+<div class="row">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-8" id = 'hbody'>
+      <p style="text-align: center;">
+        <img src="/public/loader.gif" alt="loading" class="mx-auto" style="width:55px;margin-top: 200px;margin-bottom: 200px;">
+      </p>
+	</div>
+	<div class="col-sm-2"></div>
+</div>
+<div class="row container-fluid" style="padding: 10px;background: hsl(0, 0%, 78%);margin-top: 20px;">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div class="row container-fluid" style="text-align: center;">
+      <div class="col-sm-4">
+        <h4 style="color: green;">MEDICULLY</h4><br/>
+        <p><a href="/home" class="hov">Home</a></p>
+        <p><a href="/blood_donors" class="hov">Blood Donors</a></p>
+        <p><a href="#" data-toggle="modal" data-target="#loginModal" data-keyboard="true" class="hov">Login</a></p>
+        <p><a href="#" data-toggle="modal" data-target="#loginModal" data-keyboard="true" class="hov">Signup</a></p>
+      </div>
+      <div class="col-sm-4">
+        <h4 style="color: green;">ABOUT</h4><br/>
+        <p><a href="/about" class="hov">About Us</a></p>
+        <p><a href="#" class="hov">Privacy Policy</a></p>
+        <p><a href="#" class="hov">Terms Of Service</a></p>
+        <p><a href="/about" class="hov">Contact Us</a></p>
+      </div>
+      <div class="col-sm-4">
+         <h4 style="color: green;">CONNECT</h4><br/>
+        <p><a href="#" class="hov"><i class="fa fa-facebook-official" style="font-size:25px;cursor:pointer" title="Facebook"></i>&nbsp;&nbsp;Facebook</a></p>
+        <p><a href="#" class="hov"><i class="fa fa-instagram" style="font-size:25px;cursor:pointer" title="Instagram"></i>&nbsp;&nbsp;Instagram</a></p>
+        <p><a href="#" class="hov"><i class="fa fa-twitter-square" style="font-size:25px;cursor:pointer" title="Twitter"></i>&nbsp;&nbsp;Twitter</a></p>
+        <p><a href="#" class="hov"><i class="fa fa-youtube" style="font-size:25px;cursor:pointer;" title="Youtube"></i>&nbsp;&nbsp;Youtube</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2"></div>
+  <div class="container-fluid">
+    <p style="text-align: center;font-size: 17px;"><em>All CopyRights Reserved.<b> Medicully ©2018</b></em></p>
+  </div>
+</div>
+<script type="text/javascript">
+var a=0,b=0,data='',xy='',picpath = '';
+$(document).ready(function(){
+  //console.log("inside js");
+  var xhttp = new XMLHttpRequest();
+  xhttp.open('GET','/qsns_home',true);
+  xhttp.send();
+  xhttp.onreadystatechange = function(){
+  if(this.readyState==4 && this.status == 200){
+    data =JSON.parse(this.responseText);
+      if(data.length != 0)
+      {
+         for(var i=0;i<data.length;i++)
+         {
+           xy +='<div class="media ml-5 mr-5 p-3" style="margin-top:15px;margin-bottom:15px;background: lightgrey;border: 0.5px solid rgb(179,179,179);box-shadow:4px 4px 4px rgba(0,0,0,0.5)">'+
+				       '<img id="q'+ i +'" src="/public/person.jpg" alt="'+ data[i].post_as +'" class="mr-3 mt-3 rounded-circle" style="width:45px;height:45px;">'+
+				       '<div class="media-body">'+
+				       '<h6 style="color:green;"><b>';
+               if(data[i].post_as != '*ANONYMOUS USER')
+               {
+                xy += '<a href="#" class="hov2" onclick="event.preventDefault();$(\'#profailModal\').modal(\'show\')">'+ (data[i].post_as).toUpperCase() +' </a>';
+               }
+               else
+               {
+                 xy += (data[i].post_as).toUpperCase()+'';
+               }
+
+               xy += '</b>&nbsp;<small><i style="color:black;"> Posted on <b>'+ data[i].date +'</b></i></small></h6>'+
+				       '<p style="background:white;padding:20px;border-radius:3px;">'+ data[i].qsn +'</p>'+
+				 			 '<p style="text-align:center;text-decoration:none;"><a class="mx-auto btn btn-success" href="#" onclick="event.preventDefault();$(\'#reqfailModal\').modal(\'show\')">VIEW ANSWERS</a></p>'+
+				       '</div>'+
+						   '</div>';
+            if(data[i].post_as != '*ANONYMOUS USER')
+           {
+            getpicpath(data[i].username,'q'+i);
+           }
+         }
+      }
+      else {
+        xy += '<p id="body_empty" style="text-align:center;margin-top:25px;color:red;font-size:18px;">-- No Questions to show --</p>';
+      }
+      document.getElementById('hbody').innerHTML = xy;
+    }
+  };
+  if (localStorage.chkbox && localStorage.chkbox != '') {
+        document.getElementById('chkbox').setAttribute('checked', true);
+        document.getElementById('lg_un').value = localStorage.username;
+        document.getElementById('lg_pwd').value = localStorage.password;
+    } else {
+        document.getElementById('chkbox').removeAttribute('checked');
+        document.getElementById('lg_un').value = '';
+        document.getElementById('lg_pwd').value = '';
+    }
+  });
+  function getpicpath(x,y)
+  {
+  var picpath = '';
+  var xhttp = new XMLHttpRequest();
+  xhttp.open('GET','/picpath/'+x,true);
+  xhttp.send();
+  xhttp.onreadystatechange = function(){
+  if(this.readyState==4 && this.status == 200){
+   picpath =JSON.parse(this.responseText);
+   document.getElementById(y).src = picpath;
+  }
+};
+  }
+  function chekbox()
+  {
+    if (document.getElementById('chkbox').checked) {
+            // save username and password
+            localStorage.username = document.getElementById('lg_un').value;
+            localStorage.password = document.getElementById('lg_pwd').value;
+            localStorage.chkbox = document.getElementById('chkbox').value;
+        } else {
+            localStorage.username = '';
+            localStorage.password = '';
+            localStorage.chkbox = '';
+        }
+  }
+
+	function date_create(x)
+	{
+		var ques_date = new Date(x);
+    var dd = ques_date.getDate();
+    var mm = ques_date.getMonth()+1;
+    var yyyy = ques_date.getFullYear();
+    var hr = ques_date.getHours();
+    var mn = ques_date.getMinutes();
+    if(dd<10){
+       dd='0'+dd;
+     }
+    if(mm<10){
+       mm='0'+mm;
+     }
+     if(mn<10){
+       mn='0'+mn;
+     }
+      if(hr<10){
+       hr='0'+hr;
+     }
+    ques_date = [dd,mm,yyyy].join('-')+' at '+[hr,mn].join(':');
+		return ques_date;
+	}
+	function email_check(x)
+	{
+	 var email = document.getElementById("email"+x).value;
+   var xhttp= new XMLHttpRequest();
+   xhttp.open('POST', '/email_check', true);
+   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+   xhttp.send("email="+ email);
+   xhttp.onreadystatechange = function(){
+     if (this.readyState == 4 && this.status == 200) {
+			 if(this.responseText == '0'){
+				 a=1;
+				 document.getElementById("email_err"+x).innerHTML = '* Email is already registered, Please login from it or register with another email';
+			 }
+			 else if(this.responseText == '1'){
+				 a=0;
+				 document.getElementById("email_err"+x).innerHTML = '';
+			 }
+		 }
+	}
+	return a;
+}
+	function uname_check(x)
+	{
+		var uname = document.getElementById("uname"+x).value;
+		var xhttp= new XMLHttpRequest();
+		xhttp.open('POST', '/uname_check', true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhttp.send("uname="+ uname);
+		xhttp.onreadystatechange = function(){
+			if (this.readyState == 4 && this.status == 200) {
+				if(this.responseText == '0'){
+					document.getElementById("uname_err"+x).innerHTML = '* Username is already taken, Please choose another';
+					b=1;
+				}
+				else if(this.responseText == '1'){
+					b=0;
+					document.getElementById("uname_err"+x).innerHTML = '';
+				}
+			}
+	}
+	return b;
+}
+function login_check()
+{
+	var p = document.getElementById('lg_un').value;
+	var q = document.getElementById('lg_pwd').value;
+	var xhttp = new XMLHttpRequest();
+	xhttp.open('POST', '/login', true);
+	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhttp.send("username="+ p+"&password="+q);
+	xhttp.onreadystatechange = function(){
+		if (this.readyState == 4 && this.status == 200) {
+			if(this.responseText == '0'){
+				document.getElementById("logn_check").innerHTML = '* Username or Password is incorrect';
+			}
+			else if(this.responseText == '1')
+			{
+				window.location.href='/home';
+			}
+		}
+}
+return false;
+}
+function forgpass()
+{
+  var p = document.getElementById('forgemail').value;
+  var xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '/forgot_password', true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("email="+ p);
+  xhttp.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200) {
+      if(this.responseText == '0'){
+        document.getElementById("emailerr").innerHTML = '* Provided email address is not registered';
+        document.getElementById("emailerr").style.display = 'block';
+      }
+      else if(this.responseText == '1')
+      {
+        window.location.href = '/pass_upd';
+      }
+    }
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MEDICULLY</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<style type="text/css">
+		.marg{
+			margin-left: 5px;
+			margin-right: 5px;
+		}
+		.hov:hover{
+			color: white;
+			text-shadow: 0.5px 0.5px 0.5px #000;
+			text-decoration: none;
+		}
+		.hov2:hover{
+			color: green;
+			text-decoration: none;
+		}
+		body{
+			font-family: lato !important;
+		}
+		.modal {
+		    overflow-y: auto;
+		}
+	</style>
+</head>
+<body>
+  <div id="menu" >
+  	<nav class="navbar navbar-expand-md" style="background: hsl(0, 0%, 78%);width: 100%">
+  	  <div class="container-fluid">
+  	    <div class="navbar-header">
+  	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar">
+  	        <span class="navbar-toggler-icon"></span>
+  	      </button>
+  	    </div>
+  	    <div class="collapse navbar-collapse" id="myNavbarleft">
+  	      <a href="/home"><img class="navbar-brand" src="/public/logo.PNG" alt="logo"></a>
+  	      <ul class="navbar-nav mr-auto text-center">
+  	        <li class="nav-item marg"><a class="nav-link hov" href="/blood_donors">BLOOD DONORS</a></li>
+  	        <li class="w3-dropdown-hover nav-item marg">
+  	        	<a class="nav-link hov" href="/about">ABOUT</a>
+  	        	<ul id="Demo" class="w3-dropdown-content w3-bar-block w3-card-4 w3-animate-zoom dropdown-menu">
+  	              <li><a class="dropdown-item w3-button" href="#">About Us</a></li>
+  	              <li><a class="dropdown-item w3-button" href="#">Contact Us</a></li>
+  	            </ul>
+  	        </li>
+  	      </ul>
+  	    </div>
+  	  <div class="collapse navbar-collapse" id="myNavbarright">
+  	      <ul class="navbar-nav ml-auto text-center">
+            <li class="nav-item marg nav-link" style="color:green;font-size:16px;">
+              Hello&nbsp;&nbsp;<% if(role == 'doctor'){ %><i>DR.<%= name.toUpperCase() %></i>
+                    <% }else {%><i><%= name.toUpperCase() %></i></li>
+                    <% } %>
+  	        <li class="nav-item marg"><a class="nav-link hov" href="/my_profile">PROFILE</a></li>
+            <li class="nav-item marg"><a class="nav-link hov" href="/my_request" style="color: white;text-shadow: 0.5px 0.5px 0.5px #000;text-decoration: none;">REQUESTS</a></li>
+  	        <li class="nav-item marg"><a class="nav-link hov" href="/logout">LOGOUT</a></li>
+  	      </ul>
+  	    </div>
+  			</div>
+  	</nav>
+  </div>
+<div class="row" style="margin-top:20px">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-10 container-fluid" id='rbody'>
+    <h4 class="mt-2" style="text-align:center;color:green;">PENDING REQUESTS</h4>
+    <p id="loader" style="text-align: center;display: block;">
+        <img src="/public/loader.gif" alt="loading" class="mx-auto" style="width:55px;margin-top: 200px;margin-bottom: 200px;">
+    </p>
+    <p id="rq_empty" style="text-align:center;display:none;margin-top:25px;color:red;font-size:15px;">--NO PENDING REQUESTS TO SHOW--</p>
+  </div>
+  <div class="col-sm-1"></div>
+</div>
+<div class="modal fade" id="requestModal">
+   <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+       <div class="modal-header">
+          <h4 class="modal-title mx-auto">SHARE</h4>
+        </div>
+       <div class="modal-body" id='mod_body'>
+
+       </div>
+       <div class="modal-footer">
+        <em class="mr-auto">Only the details you share are visible to the requesting person</em>
+       </div>
+     </div>
+   </div>
+</div>
+<div class="row container-fluid" style="padding: 10px;background: hsl(0, 0%, 78%);margin-top: 20px;">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div class="row container-fluid" style="text-align: center;">
+      <div class="col-sm-4">
+        <h4 style="color: green;">MEDICULLY</h4><br/>
+        <p><a href="/home" class="hov">Home</a></p>
+        <p><a href="/my_profile" class="hov">Profile</a></p>
+        <p><a href="/my_request" class="hov">Requests</a></p>
+        <p><a href="/blood_donors" class="hov">Blood Donors</a></p>
+      </div>
+      <div class="col-sm-4">
+        <h4 style="color: green;">ABOUT</h4><br/>
+        <p><a href="/about" class="hov">About Us</a></p>
+        <p><a href="#" class="hov">Privacy Policy</a></p>
+        <p><a href="#" class="hov">Terms Of Service</a></p>
+        <p><a href="/about" class="hov">Contact Us</a></p>
+      </div>
+      <div class="col-sm-4">
+         <h4 style="color: green;">CONNECT</h4><br/>
+        <p><a href="#" class="hov"><i class="fa fa-facebook-official" style="font-size:25px;cursor:pointer" title="Facebook"></i>&nbsp;&nbsp;Facebook</a></p>
+        <p><a href="#" class="hov"><i class="fa fa-instagram" style="font-size:25px;cursor:pointer" title="Instagram"></i>&nbsp;&nbsp;Instagram</a></p>
+        <p><a href="#" class="hov"><i class="fa fa-twitter-square" style="font-size:25px;cursor:pointer" title="Twitter"></i>&nbsp;&nbsp;Twitter</a></p>
+        <p><a href="#" class="hov"><i class="fa fa-youtube" style="font-size:25px;cursor:pointer;" title="Youtube"></i>&nbsp;&nbsp;Youtube</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2"></div>
+  <div class="container-fluid">
+    <p style="text-align: center;font-size: 17px;"><em>All CopyRights Reserved.<b> Medicully ©2018</b></em></p>
+  </div>
+</div>
+<script type="text/javascript">
+var acc_link='/my_request/<%= username %>',x='';
+$(document).ready(function(){
+  //console.log("inside js");
+  var xhttp = new XMLHttpRequest();
+  xhttp.open('GET',acc_link,true);
+  xhttp.send();
+  xhttp.onreadystatechange = function(){
+    if(this.readyState==4 && this.status == 200){
+      data =JSON.parse(this.responseText);
+      if(data.length != 0)
+      {
+         for(var i=0;i<data.length;i++)
+         {
+           x += '<div class="card mt-2" style="margin-bottom:15px;background:lightgrey;border-radius : 2px;">'+
+	               '<div class="card-body">'+
+	               '<p style="font-size:18px;">Request from <em>'+ data[i].req_from_name.toUpperCase() +'</em></p>'+
+	               '<p style="text-align:right;"><span><a class="btn btn-success" style="margin-right:10px;" onclick="event.preventDefault();type_of('+ i +');$(\'#requestModal\').modal(\'show\');" href="#">Accept</a>'+
+	       		     '<a class="btn btn-success"  href="/del_req/'+ data[i].req_from +'">Delete</a></span></p>'+
+	               '</div>'+
+	               '</div>'
+         }
+         document.getElementById('loader').style.display = 'none';
+         document.getElementById('rbody').innerHTML += x;
+      }
+      else {
+        document.getElementById('loader').style.display = 'none';
+				document.getElementById('rq_empty').style.display = 'block';
+      }
+    }
+  };
+  });
+function type_of(x)
+{
+	var y='';
+	y = '<p style="text-align:center;color:green;"><a class="hov2" href="/acc_req/'+ data[x].req_from +'/1" >Mobile Number Only</a></p>'+
+	    '<p style="text-align:center;color:green;"><a class="hov2" href="/acc_req/'+ data[x].req_from +'/2" >Email Address Only</a></p>'+
+	    '<p style="text-align:center;color:green;"><a class="hov2" href="/acc_req/'+ data[x].req_from +'/3" >Both Mobile Number and Email Address</a></p>'
+  document.getElementById('mod_body').innerHTML = y;
+}
+</script>
+</body>
+</html>
