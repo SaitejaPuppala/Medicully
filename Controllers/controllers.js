@@ -232,7 +232,7 @@ app.get('/password_reset/:unid',function(req,res){
     </div>',
       attachments: [{
         filename: 'logo_light.PNG',
-        path: '/public/logo_light.PNG',
+        path: '../assets/public/logo_light.PNG',
         cid: 'logo@medicully.ee'
     }] 
    };
@@ -280,7 +280,7 @@ app.get('/password_reset/:unid',function(req,res){
     </div>',
       attachments: [{
         filename: 'logo_light.PNG',
-        path: '/public/logo_light.PNG',
+        path: '../assets/public/logo_light.PNG',
         cid: 'logo@medicully.ee'
     }] 
    };
@@ -748,7 +748,7 @@ app.post('/forgot_password',function(req,res){
     </div>',
       attachments: [{
         filename: 'logo_light.PNG',
-        path: '/public/logo_light.PNG',
+        path: '../assets/public/logo_light.PNG',
         cid: 'logo@medicully.ee'
     }] 
    };
@@ -807,7 +807,7 @@ app.post('/forgot_password',function(req,res){
     </div>',
       attachments: [{
         filename: 'logo_light.PNG',
-        path: '/public/logo_light.PNG',
+        path: '../assets/public/logo_light.PNG',
         cid: 'logo@medicully.ee'
     }] 
    };
