@@ -132,7 +132,7 @@ const upload2 = multer({
         email : data.email,
         username : data.username,
         password : data.password,
-        donor : data.Donor,
+        donor : data.donor,
         role : data.role,
         bloodgrp : data.bloodgrp
       };
@@ -153,7 +153,7 @@ const upload2 = multer({
         file1_path : data.file1_path,
         username : data.username,
         password : data.password,
-        donor : data.Donor,
+        donor : data.donor,
         role : data.role,
         bloodgrp : data.bloodgrp
       };
