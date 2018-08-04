@@ -27,8 +27,4 @@
   "engines": {
     "node": "9.9.0"
   },
-   "repository": {
-    "type": "git",
-    "url": "https://git.heroku.com/medicully.git"
-  },
 }
