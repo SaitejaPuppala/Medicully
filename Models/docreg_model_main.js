@@ -5,8 +5,6 @@ const docregSchema_main = new mongoose.Schema({
   mobile : String,
   email : String,
   file1_path : String,
-  spec : String,
-  file2_path : String,
   username : String,
   password : String,
   donor : String,

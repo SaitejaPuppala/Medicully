@@ -150,36 +150,6 @@
 							<label for="file">Upload image of MBBS Certificate</label>
 							<input type="file" class="form-control" name="file1" accept="image/*" required="true">
 						</div>
-            <div class="form-group">
-              <label for="file">Choose Speciality(if any)</label>
-              <select name="specialities" id="spec" onmousedown="this.size=5;" onchange='this.size=0;
-              if(this.value!="none")
-              	{document.getElementById("speci").style.display="block";
-                 document.getElementById("speci_inp").setAttribute("required","true");}
-              else
-              	{document.getElementById("speci").style.display="none";
-                 document.getElementById("speci_inp").setAttribute("required","false");}'
-              onblur="this.size=0;" style="width: 100%;">
-                  <option value="none" selected>Select if any</option>
-                  <option value="Anesthesiology">Anesthesiology</option>
-                  <option value="Cardiothoracic Radiology">Cardiothoracic Radiology</option>
-                  <option value="Dermatology">Dermatology</option>
-                  <option value="Gynecology">Gynecology</option>
-                  <option value="Neurology">Neurology</option>
-                  <option value="Nephrology">Nephrology</option>
-                  <option value="Orthopaedic Surgery">Orthopaedic Surgery</option>
-                  <option value="Pediatrics">Pediatrics</option>
-                  <option value="Radiology-Diagnostic">Radiology-Diagnostic</option>
-                  <option value="Surgery-General">Surgery-General</option>
-                  <option value="Thoracic Surgery">Thoracic Surgery</option>
-                  <option value="Urology">Urology</option>
-                  <option value="Vascular Surgery">Vascular Surgery</option>
-              </select>
-            </div>
-						<div class="form-group" id="speci" style="display: none;">
-						 <label for="file">Upload image of Certificate for above chosen Speciality</label>
-						 <input id="speci_inp" type="file" class="form-control" name="file2" accept="image/*">
-					 </div>
 				 <p id="uname_err1" style="color:red;"></p>
              <div class="form-group">
               <input id="uname1" type="text" class="form-control" name="username" minlength="5" onfocus="document.getElementById('uname_err1').innerHTML='';" onblur="uname_check(1)" pattern="[A-Za-z][A-Za-z0-9]*" title="It should start with an alphabet and contain only alphabets(capital or small) or numbers and minimum length is 5" placeholder="Enter Username" required="true">

@@ -98,9 +98,6 @@ const upload2 = multer({
    storage : storage2
  }).single('file');
 
- // const upload2 = multer({
- //   storage : storage2
- // }).array('file2');
  app.get('/',function(req,res){
    res.redirect('/home');
  });
@@ -158,8 +155,6 @@ const upload2 = multer({
         mobile : data.mobile,
         email : data.email,
         file1_path : data.file1_path,
-        spec : data.spec,
-        file2_path : data.file2_path,
         username : data.username,
         password : data.password,
         donor : data.Donor,
@@ -356,11 +351,6 @@ app.get('/password_reset/:unid',function(req,res){
     else{
       var file1 = req.files.file1[0].filename;
       var docreg;
-      // console.log(req.files);
-      // console.log(req.files.file1[0].filename);
-      // console.log(req.files.file2[0].filename);
-      if(req.body.specialities == 'none')
-      {
         if(req.body.Donor == 'on')
         {
          docreg = {
@@ -368,8 +358,6 @@ app.get('/password_reset/:unid',function(req,res){
         mobile : req.body.mobile,
         email : req.body.email,
         file1_path : '/uploads_mbbs/'+file1,
-        spec : req.body.specialities,
-        file2_path : null,
         username : req.body.username,
         password : req.body.password,
         donor : req.body.Donor,
@@ -382,8 +370,6 @@ app.get('/password_reset/:unid',function(req,res){
         mobile : req.body.mobile,
         email : req.body.email,
         file1_path : '/uploads_mbbs/'+file1,
-        spec : req.body.specialities,
-        file2_path : null,
         username : req.body.username,
         password : req.body.password,
         donor : 'off',
@@ -395,44 +381,6 @@ app.get('/password_reset/:unid',function(req,res){
       new_doc.save();
       //console.log(sess);
       res.redirect('/email_validation/'+req.body.username);
-    }
-      else {
-            var file2 = req.files.file2[0].filename;
-            if (req.body.Donor == 'on')
-            {docreg = {
-              name : req.body.name,
-              mobile : req.body.mobile,
-              email : req.body.email,
-              file1_path : '/uploads_mbbs/'+file1,
-              spec : req.body.specialities,
-              file2_path : '/uploads_mbbs/'+file2,
-              username : req.body.username,
-              password : req.body.password,
-              donor : req.body.Donor,
-              role : 'doctor',
-              bloodgrp : req.body.bloodgrp
-            };
-            //console.log(docreg);
-          }
-            else
-            docreg = {
-              name : req.body.name,
-              mobile : req.body.mobile,
-              email : req.body.email,
-              file1_path : '/uploads_mbbs/'+file1,
-              spec : req.body.specialities,
-              file2_path : '/uploads_mbbs/'+file2,
-              username : req.body.username,
-              password : req.body.password,
-              donor : 'off',
-              role : 'doctor',
-              bloodgrp : 'NA'
-            };
-        var new_doc = new docregModel(docreg);
-        new_doc.save();
-        //console.log('doc here');
-        res.redirect('/email_validation/'+req.body.username);
-      }
     }
   });
  });
