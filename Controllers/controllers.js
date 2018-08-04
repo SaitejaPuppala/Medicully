@@ -89,11 +89,7 @@ module.exports = function(app){
 
 const upload1 = multer({
    storage : storage
- }).fields([{
-           name: 'file1', maxCount: 1
-         }, {
-           name: 'file2', maxCount: 1
-         }]);
+ }).single('file1');
 const upload2 = multer({
    storage : storage2
  }).single('file');
@@ -349,7 +345,7 @@ app.get('/password_reset/:unid',function(req,res){
     if (err) 
       console.log(err);
     else{
-      var file1 = req.files.file1[0].filename;
+      var file1 = req.file.filename;
       var docreg;
         if(req.body.Donor == 'on')
         {
