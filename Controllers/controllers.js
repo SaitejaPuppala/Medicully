@@ -141,7 +141,7 @@ const upload2 = multer({
         res.render('email_validation_success');
      }
     else {
-     docregModel_main.findOneAndRemove({_id:req.params.oid},function(err,data){
+     docregModel.findOneAndRemove({_id:req.params.oid},function(err,data){
        if (err) throw err;
        //console.log(data);
        else if(data != null)
