@@ -162,7 +162,7 @@ const upload2 = multer({
         res.render('email_validation_success');
         }
        else {
-        res.send('TOKEN EXPIRED..PLEASE REGISTER AGAIN..');
+        res.send('LINK EXPIRED..PLEASE REGISTER AGAIN..');
        }
      });
     }
@@ -181,7 +181,7 @@ app.get('/password_reset/:unid',function(req,res){
       res.render('forgpass_updation',{data:data});
     }
     else {
-      res.send('TOKEN EXPIRED..PLEASE TRY AGAIN..');
+      res.send('LINK EXPIRED..PLEASE TRY AGAIN..');
     }
   });
  });
@@ -684,7 +684,7 @@ app.post('/forgot_password',function(req,res){
        Please click the below RESET button to reset your password.</p><br/>\
       <p style="text-align:center;">\
       <form style="text-align:center;" action="https://medicully.herokuapp.com/password_reset/'+ unid +'">\
-      <input style="color: white;background-color: #29a329;padding: 10px" type="submit" value="VERIFY" />\
+      <input style="color: white;background-color: #29a329;padding: 10px" type="submit" value="RESET" />\
       </form>\
       </p>\
     </div>\
@@ -743,7 +743,7 @@ app.post('/forgot_password',function(req,res){
        Please click the below RESET button to reset your password.</p><br/>\
       <p style="text-align:center;">\
       <form style="text-align:center;" action="https://medicully.herokuapp.com/password_reset/'+ unid +'">\
-      <input style="color: white;background-color: #29a329;padding: 10px" type="submit" value="VERIFY" />\
+      <input style="color: white;background-color: #29a329;padding: 10px" type="submit" value="RESET" />\
       </form>\
       </p>\
     </div>\
