@@ -39,6 +39,9 @@
     {
       var p = document.getElementById('passnew').value;
       var q = document.getElementById('passnew_conf').value;
+      var pwd = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+      if(pwd.test(p)&&pwd.test(q))
+      {
       if(p == q)
       {
         var xhttp= new XMLHttpRequest();
@@ -64,6 +67,12 @@
         document.getElementById('passerr').innerHTML = '* Passwords mismatch';
         document.getElementById('passerr').style.display = 'block';
       }
+    }
+    else
+    {
+      document.getElementById('passerr').innerHTML = '* Password should contain atleast one capital alphabet,one small alphabet,one number and minimum length is 8';
+        document.getElementById('passerr').style.display = 'block';
+    }
     }
   </script>
 </body>

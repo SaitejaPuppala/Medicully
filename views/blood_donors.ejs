@@ -132,7 +132,7 @@
               <input type="text" class="form-control" name="name" placeholder="Enter your Name" required="true">
             </div>
             <div class="form-group">
-              <input type="text"  pattern="[0-9]{10}" onfocus="setCustomValidity('')" oninvalid="setCustomValidity('Please enter a valid mobile number')" class="form-control" name="mobile" placeholder="Enter Mobile Number" required="true">
+              <input type="text"  pattern="(\+\d{1,2}[- ]?)?\d{10}" onfocus="setCustomValidity('')" oninvalid="setCustomValidity('Please enter a valid mobile number')" class="form-control" name="mobile" placeholder="Enter Mobile Number" required="true">
             </div>
           <p id="email_err1" style="color:red;"></p>
             <div class="form-group">
@@ -161,7 +161,7 @@
             </label>
             </div>
             <div id="bg1" class="form-group" style="display:none;">
-             <input id="bg_inp1" type="text" class="form-control" name="bloodgrp" maxlength="3" pattern="[A|B|O|AB]{1,2}[+-]{1}" title="It should contain only blood group and rh factor(+/-)" placeholder="Enter Bloodgroup">
+             <input id="bg_inp1" type="text" class="form-control" name="bloodgrp" maxlength="3" pattern="[A|B|O|AB]{1,2}[+-]{1}" title="It should contain only blood group(in capital) and rh factor(+/-) without spaces" placeholder="Enter Bloodgroup">
            </div>
               <button type="submit" class="btn btn-success btn-block">SIGNUP</button>
          </form>
@@ -184,7 +184,7 @@
               <input type="text" class="form-control" name="name" placeholder="Enter your Name" required="true">
             </div>
             <div class="form-group">
-              <input type="text" pattern="[0-9]{10}" onfocus="setCustomValidity('')" oninvalid="setCustomValidity('Please enter a valid mobile number')" class="form-control" name="mobile" placeholder="Enter Mobile Number" required="true">
+              <input type="text" pattern="(\+\d{1,2}[- ]?)?\d{10}" onfocus="setCustomValidity('')" oninvalid="setCustomValidity('Please enter a valid mobile number')" class="form-control" name="mobile" placeholder="Enter Mobile Number" required="true">
             </div>
           <p id="email_err2" style="color:red;"></p>
             <div class="form-group">
@@ -209,7 +209,7 @@
             </label>
             </div>
             <div id="bg2" class="form-group" style="display:none;">
-             <input id="bg_inp2" type="text" class="form-control" name="bloodgrp" maxlength="3" pattern="[A|B|O|AB]{1,2}[+-]{1}" title="It should contain only blood group and rh factor(+/-)" placeholder="Enter Bloodgroup">
+             <input id="bg_inp2" type="text" class="form-control" name="bloodgrp" maxlength="3" pattern="[A|B|O|AB]{1,2}[+-]{1}" title="It should contain only blood group(in capital) and rh factor(+/-) without spaces" placeholder="Enter Bloodgroup">
            </div>
             <button type="submit" class="btn btn-success btn-block">SIGNUP</button>
          </form>
