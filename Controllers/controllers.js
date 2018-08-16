@@ -34,7 +34,10 @@ var transporter = nodemailer.createTransport(smtpTransport({
 
 mongoose.connect('mongodb://saiteja:puppala123@ds259778.mlab.com:59778/medicully');
 var date_crte = function(){
-  var ques_date = new Date();
+  var currentTime = new Date();
+  var currentOffset = currentTime.getTimezoneOffset();
+  var ISTOffset = 330;   // IST offset UTC +5:30 
+  var ques_date = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
   var dd = ques_date.getDate();
   var mm = ques_date.getMonth()+1;
   var yyyy = ques_date.getFullYear();
