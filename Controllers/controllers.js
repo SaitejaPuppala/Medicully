@@ -25,9 +25,9 @@ var transporter = nodemailer.createTransport(smtpTransport({
   auth: {
     xoauth2 : xoauth2.createXOAuth2Generator({
       user : 'noreply.medicully@gmail.com',
-      clientId : '156609227739-9iupolb7lthgfbhg2voftng4snl2poap.apps.googleusercontent.com',
-      clientSecret : '7G-LvS8iytIr3n4oqN8OqinS',
-      refreshToken : '1/dMatR6npRh40pgblWb1OeUJbfwXrxtqnYitOt64tH98'
+      clientId : '943363860322-q7k9m85il7vbm03ilr3c54evsct5u5rg.apps.googleusercontent.com',
+      clientSecret : '1mRTHNgejzbHr9RLB8HbFGEp',
+      refreshToken : '1//04D8TEMXrzPCjCgYIARAAGAQSNwF-L9Ir1CPthAbPPl0BqkXT8-nL0BzUg5oLOwJFTp5kBZ90V-EbxYm7Yqyt5JGNsEPQEaFALl0'
     })
   }
 }));
@@ -36,7 +36,7 @@ mongoose.connect('mongodb://saiteja:puppala123@ds259778.mlab.com:59778/medicully
 var date_crte = function(){
   var currentTime = new Date();
   var currentOffset = currentTime.getTimezoneOffset();
-  var ISTOffset = 330;   // IST offset UTC +5:30 
+  var ISTOffset = 330;   // IST offset UTC +5:30
   var ques_date = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
   var dd = ques_date.getDate();
   var mm = ques_date.getMonth()+1;
@@ -120,11 +120,11 @@ const upload2 = multer({
  else
   res.redirect('/home');
  });
- 
+
  app.get('/verify/:oid',function(req,res){
     patregModel.findOneAndRemove({_id : req.params.oid},function(err,data){
     //console.log(req.body);
-    if (err) 
+    if (err)
       console.log(err);
     //console.log(data);
     else if(data != null)
@@ -175,7 +175,7 @@ const upload2 = multer({
 app.get('/password_reset/:unid',function(req,res){
     forgpassModel.findOneAndRemove({unid : req.params.unid},function(err,data){
     //console.log(req.body);
-    if (err) 
+    if (err)
     {
       console.log(err);
     }
@@ -196,7 +196,7 @@ app.get('/password_reset/:unid',function(req,res){
   {
     patregModel.findOne({username : req.params.un},function(err,data){
     //console.log(req.body);
-    if (err) 
+    if (err)
       console.log(err);
     //console.log(data);
     if(data != null)
@@ -228,7 +228,7 @@ app.get('/password_reset/:unid',function(req,res){
         filename: 'logo_light.PNG',
         path: 'https://medicully.herokuapp.com/public/logo_light.PNG',
         cid: 'logo@medicully.ee'
-    }] 
+    }]
    };
    transporter.sendMail(message, function(err, resp){
     if(err)
@@ -276,7 +276,7 @@ app.get('/password_reset/:unid',function(req,res){
         filename: 'logo_light.PNG',
         path: 'https://medicully.herokuapp.com/public/logo_light.PNG',
         cid: 'logo@medicully.ee'
-    }] 
+    }]
    };
    transporter.sendMail(message, function(err, resp){
     if(err)
@@ -345,7 +345,7 @@ app.get('/password_reset/:unid',function(req,res){
  app.post('/docreg',function(req, res){
   sess = req.session;
   upload1(req, res, function(err){
-    if (err) 
+    if (err)
       console.log(err);
     else{
       var file1 = req.file.filename;
@@ -420,7 +420,7 @@ app.get('/password_reset/:unid',function(req,res){
    sess = req.session;
   patregModel_main.findOne({username : req.body.username , password : req.body.password},function(err,data){
     //console.log(req.body);
-    if (err) 
+    if (err)
       console.log(err);
     //console.log(data);
     if(data != null)
@@ -455,7 +455,7 @@ app.get('/password_reset/:unid',function(req,res){
 
  app.get('/logout',function(req,res){
    req.session.destroy(function(err) {
-  if(err) 
+  if(err)
     console.log(err);
   else {
     res.redirect('/home');
@@ -466,7 +466,7 @@ app.get('/password_reset/:unid',function(req,res){
  app.get('/blood_dnrs',function(req,res){
   var data_file  = [];
    patregModel_main.find({donor : 'on'},function(err,data1){
-     if (err) 
+     if (err)
       console.log(err);
     // console.log(data1);
     else
@@ -487,7 +487,7 @@ app.get('/request/:usrname',function(req,res){
  if(sess.name != undefined && sess.username != req.params.usrname)
  {
    patregModel_main.findOne({username : req.params.usrname},{_id:0,name:1},function(err,data){
-     if (err) 
+     if (err)
       console.log(err);
     else if(data != null)
      {
@@ -550,7 +550,7 @@ app.get('/request/:usrname',function(req,res){
    if(sess.role != undefined)
    {
      reqModel.find({req_to:sess.username,status:'0'},{_id:0},function(err,data){
-       if (err) 
+       if (err)
        {
         console.log(err);
        }
@@ -625,7 +625,7 @@ app.get('/request/:usrname',function(req,res){
 
  app.post('/email_check',function(req,res){
    patregModel_main.findOne({email : req.body.email },function(err,data){
-     if (err) 
+     if (err)
      {
       console.log(err);
      }
@@ -655,7 +655,7 @@ app.get('/request/:usrname',function(req,res){
 
 app.post('/forgot_password',function(req,res){
    patregModel_main.findOne({email : req.body.email },function(err,data){
-     if (err) 
+     if (err)
      {
       console.log(err);
      }
@@ -697,7 +697,7 @@ app.post('/forgot_password',function(req,res){
         filename: 'logo_light.PNG',
         path: 'https://medicully.herokuapp.com/public/logo_light.PNG',
         cid: 'logo@medicully.ee'
-    }] 
+    }]
    };
    transporter.sendMail(message, function(err, resp){
     if(err)
@@ -756,7 +756,7 @@ app.post('/forgot_password',function(req,res){
         filename: 'logo_light.PNG',
         path: 'https://medicully.herokuapp.com/public/logo_light.PNG',
         cid: 'logo@medicully.ee'
-    }] 
+    }]
    };
    transporter.sendMail(message, function(err, resp){
     if(err)
@@ -799,7 +799,7 @@ app.post('/qsn_submit',function(req,res){
 
  app.post('/uname_check',function(req,res){
    patregModel_main.findOne({username : req.body.uname },function(err,data){
-     if (err) 
+     if (err)
      {
       console.log(err);
      }
@@ -810,7 +810,7 @@ app.post('/qsn_submit',function(req,res){
       }
      else {
       docregModel_main.findOne({username : req.body.uname},function(err,data){
-        if (err) 
+        if (err)
         {
           console.log(err);
         }
@@ -831,7 +831,7 @@ app.post('/qsn_submit',function(req,res){
     if(req.body.role == 'patient')
     {
        patregModel_main.updateOne({username : req.body.username },{$set: { "password" : req.body.passnew}},function(err,data){
-     if (err) 
+     if (err)
      {
       console.log(err);
      }
@@ -848,7 +848,7 @@ app.post('/qsn_submit',function(req,res){
     else if(req.body.role == 'doctor')
     {
       docregModel_main.updateOne({username : req.body.username},{$set: { "password" : req.body.passnew}},function(err,data){
-        if (err) 
+        if (err)
         {
           console.log(err);
         }
@@ -975,7 +975,7 @@ app.get('/my_profile/info',function(req,res){
   else if(sess.role == 'patient')
   {
     patregModel_main.findOne({username:sess.username},{_id:0},function(err,data){
-    if (err) 
+    if (err)
       {
       console.log(err);
     }
@@ -996,7 +996,7 @@ app.get('/my_profile/qsns_asked',function(req,res){
   if(sess.role != undefined)
   {
     quesModel.find({username:sess.username},function(err,data){
-    if (err) 
+    if (err)
       console.log(err);
       res.json(data);
   });
@@ -1011,7 +1011,7 @@ app.get('/my_profile/qsns_answered',function(req,res){
   if(sess.role != undefined)
   {
     quesModel.find({"answs.ans_by_username":sess.username},function(err,data){
-    if (err) 
+    if (err)
       console.log(err);
   //console.log(data);
       res.json(data);
@@ -1028,13 +1028,13 @@ app.get('/my_profile/request_info',function(req,res){
   if(sess.role != undefined)
   {
     reqModel.find({req_to:sess.username,status : '1'},{_id:0},function(err,dat){
-    if (err) 
+    if (err)
       console.log(err);
     else
     {
       data[0] = dat;
       reqModel.find({req_from:sess.username,status : '1'},{_id:0},function(err,dat2){
-    if (err) 
+    if (err)
       console.log(err);
     else
     {
@@ -1062,7 +1062,7 @@ app.post('/update_picture',function(req,res){
       var file = req.file.filename;
       if(sess.pic_path == '/public/doctor.PNG')
       {
-        
+
       docregModel_main.updateOne({username:sess.username},{$set: { "pic_path" : '/uploads_profile/'+ file }},{upsert:false}, function(err2, result){
          if(err2)
         {
@@ -1070,13 +1070,13 @@ app.post('/update_picture',function(req,res){
         }
         else
         {
-         sess.pic_path = '/uploads_profile/'+ file; 
+         sess.pic_path = '/uploads_profile/'+ file;
          res.redirect('/my_profile');
         }
        });
       }
        else
-       {  
+       {
       docregModel_main.updateOne({username:sess.username},{$set: { "pic_path" : '/uploads_profile/'+ file }},{upsert:false}, function(err2, result){
          if(err2)
         {
@@ -1085,10 +1085,10 @@ app.post('/update_picture',function(req,res){
         else
         {
           fs.unlink('./assets'+sess.pic_path, function(error){
-          if (error) 
+          if (error)
             console.log(error);
           else{
-            sess.pic_path = '/uploads_profile/'+ file; 
+            sess.pic_path = '/uploads_profile/'+ file;
             res.redirect('/my_profile');
           }
         });
@@ -1130,18 +1130,18 @@ app.post('/update_picture',function(req,res){
         else
         {
           fs.unlink('./assets'+sess.pic_path, function(error){
-          if (error) 
+          if (error)
             console.log(error);
           else
           {
-           sess.pic_path = '/uploads_profile/'+ file; 
-           res.redirect('/my_profile'); 
+           sess.pic_path = '/uploads_profile/'+ file;
+           res.redirect('/my_profile');
           }
         });
-         
+
         }
        });
-   
+
     }
     }
    });
@@ -1179,7 +1179,7 @@ app.get('/picpath/:un',function(req,res){
     }
   });
 });
- 
+
 app.post('/update_password',function(req,res){
   sess = req.session;
   if(sess.role == 'doctor')
@@ -1202,7 +1202,7 @@ app.post('/update_password',function(req,res){
          res.send('1');
        });
        }
-     }); 
+     });
   }
   else if(sess.role == 'patient')
   {
@@ -1224,7 +1224,7 @@ app.post('/update_password',function(req,res){
          res.send('1');
        });
        }
-     }); 
+     });
   }
   else {
     res.redirect('/home');
@@ -1307,9 +1307,9 @@ app.get('/profile/:un',function(req,res){
     else
     {
       patregModel_main.findOne({username:req.params.un},function(err,data){
-        if(err) 
+        if(err)
           console.log(err);
-        else 
+        else
         {
           res.json(data);
         }
@@ -1335,7 +1335,7 @@ app.get('/detupd/:name/:mobile/:donor/:bloodgrp',function(req,res){
         {
          res.send('1');
         }
-     }); 
+     });
   }
   else if(sess.role == 'patient')
   {
@@ -1403,7 +1403,7 @@ app.get('/detupd/:name/:mobile/:donor/:bloodgrp',function(req,res){
 //     else
 //     res.render('email_validation');
 // });
-    
+
 //   }
 //   else
 //   {
