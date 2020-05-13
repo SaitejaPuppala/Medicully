@@ -172,7 +172,7 @@
 						<div id="bg1" class="form-group" style="display:none;">
 						 <input id="bg_inp1" type="text" class="form-control" name="bloodgrp" maxlength="3" pattern="[A|B|O|AB]{1,2}[+-]{1}" title="It should contain only blood group(in capital) and rh factor(+/-) without spaces" placeholder="Enter Bloodgroup">
 					 </div>
-              <button type="submit" class="btn btn-success btn-block">SIGNUP</button>
+              <button type="submit" class="btn btn-success btn-block" onsubmit="return signup_check(1);">SIGNUP</button>
          </form>
         </div>
         <div class="modal-footer">
@@ -220,7 +220,7 @@
 						<div id="bg2" class="form-group" style="display:none;">
 						 <input id="bg_inp2" type="text" class="form-control" name="bloodgrp" maxlength="3" pattern="[A|B|O|AB]{1,2}[+-]{1}" title="It should contain only blood group(in capital) and rh factor(+/-) without spaces" placeholder="Enter Bloodgroup">
 					 </div>
-            <button type="submit" class="btn btn-success btn-block">SIGNUP</button>
+            <button type="submit" class="btn btn-success btn-block" onsubmit="return signup_check(2);">SIGNUP</button>
          </form>
         </div>
         <div class="modal-footer">
@@ -473,6 +473,17 @@ function login_check()
 }
 return false;
 }
+
+function signup_check(x){
+	var emailCheck = email_check(x);
+	var unameCheck = uname_check(x);
+	if(emailCheck + unameCheck != 0){
+		return false;
+	} else {
+		return true;
+	}
+}
+
 function forgpass()
 {
   var p = document.getElementById('forgemail').value;
