@@ -1085,12 +1085,11 @@ app.post('/update_picture',function(req,res){
         else
         {
           fs.unlink('./assets'+sess.pic_path, function(error){
-          if (error)
+          if (error){
             console.log(error);
-          else{
-            sess.pic_path = '/uploads_profile/'+ file;
-            res.redirect('/my_profile');
           }
+          sess.pic_path = '/uploads_profile/'+ file;
+          res.redirect('/my_profile');
         });
         }
        });
@@ -1130,13 +1129,11 @@ app.post('/update_picture',function(req,res){
         else
         {
           fs.unlink('./assets'+sess.pic_path, function(error){
-          if (error)
+          if (error){
             console.log(error);
-          else
-          {
-           sess.pic_path = '/uploads_profile/'+ file;
-           res.redirect('/my_profile');
           }
+          sess.pic_path = '/uploads_profile/'+ file;
+          res.redirect('/my_profile');
         });
 
         }
