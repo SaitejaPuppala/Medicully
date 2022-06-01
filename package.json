@@ -20,7 +20,7 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "npm": "^6.13.4",
     "sendmail": "^1.4.1",
-    "sharp": "^0.20.5",
+    "sharp": "^0.30.5",
     "uuid": "^3.3.2",
     "xoauth2": "^1.2.0"
   },
