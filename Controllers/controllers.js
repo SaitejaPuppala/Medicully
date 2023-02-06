@@ -32,7 +32,7 @@ var transporter = nodemailer.createTransport(smtpTransport({
   }
 }));
 
-mongoose.connect('mongodb+srv://medicully:8mW2IxjmoQhDI5aQ@medicully.cbaamnc.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://medicully:8mW2IxjmoQhDI5aQ@medicully.cbaamnc.mongodb.net/medicully', {dbName: "medicully"}, { useNewUrlParser: true });
 var date_crte = function(){
   var currentTime = new Date();
   var currentOffset = currentTime.getTimezoneOffset();
