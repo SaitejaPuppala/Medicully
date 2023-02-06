@@ -24,10 +24,10 @@ var transporter = nodemailer.createTransport(smtpTransport({
   host: 'smtp.gmail.com',
   auth: {
     xoauth2 : xoauth2.createXOAuth2Generator({
-      user : 'noreply.medicully@gmail.com',
-      clientId : '943363860322-q7k9m85il7vbm03ilr3c54evsct5u5rg.apps.googleusercontent.com',
-      clientSecret : '1mRTHNgejzbHr9RLB8HbFGEp',
-      refreshToken : '1//04D8TEMXrzPCjCgYIARAAGAQSNwF-L9Ir1CPthAbPPl0BqkXT8-nL0BzUg5oLOwJFTp5kBZ90V-EbxYm7Yqyt5JGNsEPQEaFALl0'
+      user : 'noreply.medicully.1@gmail.com',
+      clientId : '827768668991-b05tle1mkasjabcug2djntsjoqt472p4.apps.googleusercontent.com',
+      clientSecret : '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',
+      refreshToken : '1//04sz2a5ZBcC2ACgYIARAAGAQSNwF-L9Irn0FVXCiVtk5iKbF5dUgkJLj87fo4fEeogq0tYg9ffnOgdSSkEIXkbTnsihqcWFAxyFk'
     })
   }
 }));
