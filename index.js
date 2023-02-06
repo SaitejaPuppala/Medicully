@@ -6,12 +6,8 @@ var controller = require('./Controllers/controllers.js');
 const PORT = process.env.PORT || 3000;
 
 var store = new MongoDBStore({
-  // uri: 'mongodb://saiteja:puppala123@ds259778.mlab.com:59778/medicully',
   uri: 'mongodb+srv://medicully:8mW2IxjmoQhDI5aQ@medicully.cbaamnc.mongodb.net/?retryWrites=true&w=majority',
-  collection: 'mySessions',
-  connectionOptions: {
-    useNewUrlParser: true
-  }
+  collection: 'mySessions'
 });
 
 store.on('connected', function() {
