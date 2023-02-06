@@ -202,7 +202,7 @@ app.get('/password_reset/:unid',function(req,res){
     if(data != null)
     {
      var message = {
-    from: 'medicully <noreply.medicully@gmail.com>',
+    from: 'medicully <noreply.medicully.1@gmail.com>',
     to: data.email,
     subject: 'EMAIL VERIFICATION',
     //text : 'hello'
@@ -217,7 +217,7 @@ app.get('/password_reset/:unid',function(req,res){
        Welcome to <b style="color: #29a329;">MEDICULLY</b>.\
        Please click the below VERIFY button to verify your email address.</p><br/>\
       <p style="text-align:center;">\
-      <form style="text-align:center;" action="https://medicully.herokuapp.com/verify/'+ data._id +'">\
+      <form style="text-align:center;" action="https://medicully.onrender.com/verify/'+ data._id +'">\
       <input style="color: white;background-color: #29a329;padding: 10px" type="submit" value="VERIFY" />\
       </form>\
       </p>\
@@ -226,7 +226,7 @@ app.get('/password_reset/:unid',function(req,res){
     </div>',
       attachments: [{
         filename: 'logo_light.PNG',
-        path: 'https://medicully.herokuapp.com/public/logo_light.PNG',
+        path: 'https://medicully.onrender.com/public/logo_light.PNG',
         cid: 'logo@medicully.ee'
     }]
    };
@@ -250,7 +250,7 @@ app.get('/password_reset/:unid',function(req,res){
        if(data != null)
       {
     var message = {
-    from: 'medicully <noreply.medicully@gmail.com>',
+    from: 'medicully <noreply.medicully.1@gmail.com>',
     to: data.email,
     subject: 'EMAIL VERIFICATION',
     //text : 'hello'
@@ -265,7 +265,7 @@ app.get('/password_reset/:unid',function(req,res){
        Welcome to <b style="color: #29a329;">MEDICULLY</b>.\
        Please click the below VERIFY button to verify your email address.</p><br/>\
       <p style="text-align:center;">\
-      <form style="text-align:center;" action="https://medicully.herokuapp.com/verify/'+ data._id +'">\
+      <form style="text-align:center;" action="https://medicully.onrender.com/verify/'+ data._id +'">\
       <input style="color: white;background-color: #29a329;padding: 10px" type="submit" value="VERIFY" />\
       </form>\
       </p>\
@@ -274,7 +274,7 @@ app.get('/password_reset/:unid',function(req,res){
     </div>',
       attachments: [{
         filename: 'logo_light.PNG',
-        path: 'https://medicully.herokuapp.com/public/logo_light.PNG',
+        path: 'https://medicully.onrender.com/public/logo_light.PNG',
         cid: 'logo@medicully.ee'
     }]
    };
@@ -672,7 +672,7 @@ app.post('/forgot_password',function(req,res){
         var new_forgpass = new forgpassModel(forgpass);
         new_forgpass.save();
         var message = {
-    from: 'medicully <noreply.medicully@gmail.com>',
+    from: 'medicully <noreply.medicully.1@gmail.com>',
     to: data.email,
     subject: 'PASSWORD RESET EMAIL',
     //text : 'hello'
@@ -686,7 +686,7 @@ app.post('/forgot_password',function(req,res){
       <p style="text-indent:50px;">\
        Please click the below RESET button to reset your password.</p><br/>\
       <p style="text-align:center;">\
-      <form style="text-align:center;" action="https://medicully.herokuapp.com/password_reset/'+ unid +'">\
+      <form style="text-align:center;" action="https://medicully.onrender.com/password_reset/'+ unid +'">\
       <input style="color: white;background-color: #29a329;padding: 10px" type="submit" value="RESET" />\
       </form>\
       </p>\
@@ -695,7 +695,7 @@ app.post('/forgot_password',function(req,res){
     </div>',
       attachments: [{
         filename: 'logo_light.PNG',
-        path: 'https://medicully.herokuapp.com/public/logo_light.PNG',
+        path: 'https://medicully.onrender.com/public/logo_light.PNG',
         cid: 'logo@medicully.ee'
     }]
    };
@@ -731,7 +731,7 @@ app.post('/forgot_password',function(req,res){
         var new_forgpass = new forgpassModel(forgpass);
         new_forgpass.save();
         var message = {
-    from: 'medicully <noreply.medicully@gmail.com>',
+    from: 'medicully <noreply.medicully.1@gmail.com>',
     to: data.email,
     subject: 'PASSWORD RESET EMAIL',
     //text : 'hello'
@@ -745,7 +745,7 @@ app.post('/forgot_password',function(req,res){
       <p style="text-indent:50px;">\
        Please click the below RESET button to reset your password.</p><br/>\
       <p style="text-align:center;">\
-      <form style="text-align:center;" action="https://medicully.herokuapp.com/password_reset/'+ unid +'">\
+      <form style="text-align:center;" action="https://medicully.onrender.com/password_reset/'+ unid +'">\
       <input style="color: white;background-color: #29a329;padding: 10px" type="submit" value="RESET" />\
       </form>\
       </p>\
@@ -754,7 +754,7 @@ app.post('/forgot_password',function(req,res){
     </div>',
       attachments: [{
         filename: 'logo_light.PNG',
-        path: 'https://medicully.herokuapp.com/public/logo_light.PNG',
+        path: 'https://medicully.onrender.com/public/logo_light.PNG',
         cid: 'logo@medicully.ee'
     }]
    };
